@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1610061699 source:c:\users\ish\downloads\udemy\me\imagecopy\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
