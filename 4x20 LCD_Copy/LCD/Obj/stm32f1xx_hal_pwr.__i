@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\Inc -I.\Drivers\STM32F1xx_HAL_Driver\Inc -I.\Drivers\CMSIS\Device\ST\STM32F1xx\Include -I.\Drivers\CMSIS\Include -I.\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -I.\lcd_lib 
+-I C:\Keil\ARM\RV31\INC 
+-I C:\Keil\ARM\CMSIS\Include 
+-I C:\Keil\ARM\Inc\ST\STM32F10x 
+-DUSE_HAL_DRIVER -DSTM32F103xB -DHAL_UART_MODULE_ENABLED -DSTM32F10X_MD -DHAL_TIM_MODULE_ENABLED -DLCD16X2_LINES -o ".\Obj\stm32f1xx_hal_pwr.o" --omf_browse ".\Obj\stm32f1xx_hal_pwr.crf" --depend ".\Obj\stm32f1xx_hal_pwr.d" "Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c"

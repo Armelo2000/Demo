@@ -1,0 +1,9 @@
+#define LCD_PORT_DATA	GPIOB
+#define LCD_PORT_CTRL	GPIOB
+
+#define LCD_RS		GPIO_PIN_4
+#define LCD_E		GPIO_PIN_5
+#define LCD_D4		GPIO_PIN_1
+#define LCD_D5		GPIO_PIN_15
+#define LCD_D6		GPIO_PIN_14
+#define LCD_D7		GPIO_PIN_13
