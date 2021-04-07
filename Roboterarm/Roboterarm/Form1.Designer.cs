@@ -41,12 +41,22 @@
             this.btn_Stop = new System.Windows.Forms.Button();
             this.btn_Start = new System.Windows.Forms.Button();
             this.grbox_Roboter = new System.Windows.Forms.GroupBox();
+            this.txtbox_S2_distance = new System.Windows.Forms.TextBox();
+            this.txtbox_S1_distance = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.chbox_sensor2_DirInvert = new System.Windows.Forms.CheckBox();
+            this.btn_S2Right = new System.Windows.Forms.Button();
+            this.btn_S2Left = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chbox_sensor1_DirInvert = new System.Windows.Forms.CheckBox();
+            this.btn_S1Right = new System.Windows.Forms.Button();
+            this.btn_S1Left = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbbox_S2_unit = new System.Windows.Forms.ComboBox();
             this.cmbbox_S1_unit = new System.Windows.Forms.ComboBox();
-            this.txtbox_S2_distance = new System.Windows.Forms.TextBox();
+            this.txtbox_S2_distanceR_Only = new System.Windows.Forms.TextBox();
             this.label_distance = new System.Windows.Forms.Label();
-            this.txtbox_S1_distance = new System.Windows.Forms.TextBox();
+            this.txtbox_S1_distanceR_Only = new System.Windows.Forms.TextBox();
             this.label_S2_distance = new System.Windows.Forms.Label();
             this.label_S1_distance = new System.Windows.Forms.Label();
             this.grbox_connect = new System.Windows.Forms.GroupBox();
@@ -98,6 +108,10 @@
             this.about_panel.SuspendLayout();
             this.DeveloperInfo.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // uart
+            // 
+            this.uart.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.uart_DataReceived);
             // 
             // menuStrip1
             // 
@@ -191,12 +205,22 @@
             // 
             // grbox_Roboter
             // 
+            this.grbox_Roboter.Controls.Add(this.txtbox_S2_distance);
+            this.grbox_Roboter.Controls.Add(this.txtbox_S1_distance);
+            this.grbox_Roboter.Controls.Add(this.label8);
+            this.grbox_Roboter.Controls.Add(this.chbox_sensor2_DirInvert);
+            this.grbox_Roboter.Controls.Add(this.btn_S2Right);
+            this.grbox_Roboter.Controls.Add(this.btn_S2Left);
+            this.grbox_Roboter.Controls.Add(this.label7);
+            this.grbox_Roboter.Controls.Add(this.chbox_sensor1_DirInvert);
+            this.grbox_Roboter.Controls.Add(this.btn_S1Right);
+            this.grbox_Roboter.Controls.Add(this.btn_S1Left);
             this.grbox_Roboter.Controls.Add(this.label4);
             this.grbox_Roboter.Controls.Add(this.cmbbox_S2_unit);
             this.grbox_Roboter.Controls.Add(this.cmbbox_S1_unit);
-            this.grbox_Roboter.Controls.Add(this.txtbox_S2_distance);
+            this.grbox_Roboter.Controls.Add(this.txtbox_S2_distanceR_Only);
             this.grbox_Roboter.Controls.Add(this.label_distance);
-            this.grbox_Roboter.Controls.Add(this.txtbox_S1_distance);
+            this.grbox_Roboter.Controls.Add(this.txtbox_S1_distanceR_Only);
             this.grbox_Roboter.Controls.Add(this.label_S2_distance);
             this.grbox_Roboter.Controls.Add(this.label_S1_distance);
             this.grbox_Roboter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,11 +231,105 @@
             this.grbox_Roboter.TabStop = false;
             this.grbox_Roboter.Text = "Data";
             // 
+            // txtbox_S2_distance
+            // 
+            this.txtbox_S2_distance.Location = new System.Drawing.Point(248, 138);
+            this.txtbox_S2_distance.Name = "txtbox_S2_distance";
+            this.txtbox_S2_distance.Size = new System.Drawing.Size(121, 23);
+            this.txtbox_S2_distance.TabIndex = 21;
+            // 
+            // txtbox_S1_distance
+            // 
+            this.txtbox_S1_distance.Location = new System.Drawing.Point(248, 90);
+            this.txtbox_S1_distance.Name = "txtbox_S1_distance";
+            this.txtbox_S1_distance.Size = new System.Drawing.Size(121, 23);
+            this.txtbox_S1_distance.TabIndex = 20;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(22, 259);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 17);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Sensor 2 ";
+            // 
+            // chbox_sensor2_DirInvert
+            // 
+            this.chbox_sensor2_DirInvert.AutoSize = true;
+            this.chbox_sensor2_DirInvert.Location = new System.Drawing.Point(358, 258);
+            this.chbox_sensor2_DirInvert.Name = "chbox_sensor2_DirInvert";
+            this.chbox_sensor2_DirInvert.Size = new System.Drawing.Size(62, 21);
+            this.chbox_sensor2_DirInvert.TabIndex = 18;
+            this.chbox_sensor2_DirInvert.Text = "Invert";
+            this.chbox_sensor2_DirInvert.UseVisualStyleBackColor = true;
+            // 
+            // btn_S2Right
+            // 
+            this.btn_S2Right.Location = new System.Drawing.Point(248, 246);
+            this.btn_S2Right.Name = "btn_S2Right";
+            this.btn_S2Right.Size = new System.Drawing.Size(88, 33);
+            this.btn_S2Right.TabIndex = 17;
+            this.btn_S2Right.Text = "Right";
+            this.btn_S2Right.UseVisualStyleBackColor = true;
+            this.btn_S2Right.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_S2Right_MouseDown);
+            this.btn_S2Right.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_S2Right_MouseUp);
+            // 
+            // btn_S2Left
+            // 
+            this.btn_S2Left.Location = new System.Drawing.Point(111, 246);
+            this.btn_S2Left.Name = "btn_S2Left";
+            this.btn_S2Left.Size = new System.Drawing.Size(88, 33);
+            this.btn_S2Left.TabIndex = 16;
+            this.btn_S2Left.Text = "Left";
+            this.btn_S2Left.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(22, 210);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 17);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Sensor 1 ";
+            // 
+            // chbox_sensor1_DirInvert
+            // 
+            this.chbox_sensor1_DirInvert.AutoSize = true;
+            this.chbox_sensor1_DirInvert.Location = new System.Drawing.Point(358, 209);
+            this.chbox_sensor1_DirInvert.Name = "chbox_sensor1_DirInvert";
+            this.chbox_sensor1_DirInvert.Size = new System.Drawing.Size(62, 21);
+            this.chbox_sensor1_DirInvert.TabIndex = 14;
+            this.chbox_sensor1_DirInvert.Text = "Invert";
+            this.chbox_sensor1_DirInvert.UseVisualStyleBackColor = true;
+            // 
+            // btn_S1Right
+            // 
+            this.btn_S1Right.Location = new System.Drawing.Point(248, 197);
+            this.btn_S1Right.Name = "btn_S1Right";
+            this.btn_S1Right.Size = new System.Drawing.Size(88, 33);
+            this.btn_S1Right.TabIndex = 13;
+            this.btn_S1Right.Text = "Right";
+            this.btn_S1Right.UseVisualStyleBackColor = true;
+            this.btn_S1Right.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btn_S1Right_KeyDown);
+            this.btn_S1Right.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btn_S1Right_KeyPress);
+            // 
+            // btn_S1Left
+            // 
+            this.btn_S1Left.Location = new System.Drawing.Point(111, 197);
+            this.btn_S1Left.Name = "btn_S1Left";
+            this.btn_S1Left.Size = new System.Drawing.Size(88, 33);
+            this.btn_S1Left.TabIndex = 12;
+            this.btn_S1Left.Text = "Left";
+            this.btn_S1Left.UseVisualStyleBackColor = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(250, 58);
+            this.label4.Location = new System.Drawing.Point(387, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 17);
             this.label4.TabIndex = 11;
@@ -223,7 +341,7 @@
             this.cmbbox_S2_unit.Items.AddRange(new object[] {
             "mm",
             "cm"});
-            this.cmbbox_S2_unit.Location = new System.Drawing.Point(247, 138);
+            this.cmbbox_S2_unit.Location = new System.Drawing.Point(384, 138);
             this.cmbbox_S2_unit.Name = "cmbbox_S2_unit";
             this.cmbbox_S2_unit.Size = new System.Drawing.Size(54, 24);
             this.cmbbox_S2_unit.TabIndex = 10;
@@ -234,36 +352,38 @@
             this.cmbbox_S1_unit.Items.AddRange(new object[] {
             "mm",
             "cm"});
-            this.cmbbox_S1_unit.Location = new System.Drawing.Point(248, 90);
+            this.cmbbox_S1_unit.Location = new System.Drawing.Point(385, 90);
             this.cmbbox_S1_unit.Name = "cmbbox_S1_unit";
             this.cmbbox_S1_unit.Size = new System.Drawing.Size(54, 24);
             this.cmbbox_S1_unit.TabIndex = 9;
             // 
-            // txtbox_S2_distance
+            // txtbox_S2_distanceR_Only
             // 
-            this.txtbox_S2_distance.Location = new System.Drawing.Point(111, 138);
-            this.txtbox_S2_distance.Name = "txtbox_S2_distance";
-            this.txtbox_S2_distance.Size = new System.Drawing.Size(131, 23);
-            this.txtbox_S2_distance.TabIndex = 8;
-            this.txtbox_S2_distance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_S2_distance_KeyPress);
+            this.txtbox_S2_distanceR_Only.Location = new System.Drawing.Point(111, 138);
+            this.txtbox_S2_distanceR_Only.Name = "txtbox_S2_distanceR_Only";
+            this.txtbox_S2_distanceR_Only.ReadOnly = true;
+            this.txtbox_S2_distanceR_Only.Size = new System.Drawing.Size(121, 23);
+            this.txtbox_S2_distanceR_Only.TabIndex = 8;
+            this.txtbox_S2_distanceR_Only.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_S2_distance_KeyPress);
             // 
             // label_distance
             // 
             this.label_distance.AutoSize = true;
             this.label_distance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_distance.Location = new System.Drawing.Point(152, 58);
+            this.label_distance.Location = new System.Drawing.Point(213, 58);
             this.label_distance.Name = "label_distance";
             this.label_distance.Size = new System.Drawing.Size(63, 17);
             this.label_distance.TabIndex = 7;
             this.label_distance.Text = "Distance";
             // 
-            // txtbox_S1_distance
+            // txtbox_S1_distanceR_Only
             // 
-            this.txtbox_S1_distance.Location = new System.Drawing.Point(111, 90);
-            this.txtbox_S1_distance.Name = "txtbox_S1_distance";
-            this.txtbox_S1_distance.Size = new System.Drawing.Size(131, 23);
-            this.txtbox_S1_distance.TabIndex = 6;
-            this.txtbox_S1_distance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_S1_distance_KeyPress);
+            this.txtbox_S1_distanceR_Only.Location = new System.Drawing.Point(111, 90);
+            this.txtbox_S1_distanceR_Only.Name = "txtbox_S1_distanceR_Only";
+            this.txtbox_S1_distanceR_Only.ReadOnly = true;
+            this.txtbox_S1_distanceR_Only.Size = new System.Drawing.Size(121, 23);
+            this.txtbox_S1_distanceR_Only.TabIndex = 6;
+            this.txtbox_S1_distanceR_Only.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_S1_distance_KeyPress);
             // 
             // label_S2_distance
             // 
@@ -765,15 +885,25 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbbox_S2_unit;
         private System.Windows.Forms.ComboBox cmbbox_S1_unit;
-        private System.Windows.Forms.TextBox txtbox_S2_distance;
+        private System.Windows.Forms.TextBox txtbox_S2_distanceR_Only;
         private System.Windows.Forms.Label label_distance;
-        private System.Windows.Forms.TextBox txtbox_S1_distance;
+        private System.Windows.Forms.TextBox txtbox_S1_distanceR_Only;
         private System.Windows.Forms.Label label_S2_distance;
         private System.Windows.Forms.Label label_S1_distance;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label LbelConnectionInfo;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox chbox_sensor2_DirInvert;
+        private System.Windows.Forms.Button btn_S2Right;
+        private System.Windows.Forms.Button btn_S2Left;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox chbox_sensor1_DirInvert;
+        private System.Windows.Forms.Button btn_S1Right;
+        private System.Windows.Forms.Button btn_S1Left;
+        private System.Windows.Forms.TextBox txtbox_S2_distance;
+        private System.Windows.Forms.TextBox txtbox_S1_distance;
     }
 }
 

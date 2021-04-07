@@ -8,3 +8,13 @@ C:\Users\Neu\source\repos\Roboterarm\Roboterarm\obj\Debug\Roboterarm.csproj.Core
 C:\Users\Neu\source\repos\Roboterarm\Roboterarm\obj\Debug\Roboterarm.exe
 C:\Users\Neu\source\repos\Roboterarm\Roboterarm\obj\Debug\Roboterarm.pdb
 C:\Users\Neu\source\repos\Roboterarm\Roboterarm\obj\Debug\Roboterarm.Form1.resources
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.csprojAssemblyReference.cache
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.Form1.resources
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.Properties.Resources.resources
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.csproj.GenerateResource.cache
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.csproj.CoreCompileInputs.cache
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.exe
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\obj\Debug\Roboterarm.pdb
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\bin\Debug\Roboterarm.exe.config
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\bin\Debug\Roboterarm.exe
+C:\Users\Neu\Desktop\projekte\RoboterArm\Roboterarm\bin\Debug\Roboterarm.pdb

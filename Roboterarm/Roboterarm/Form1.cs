@@ -13,11 +13,13 @@ namespace Roboterarm
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
             uart.Encoding = Encoding.UTF8;
             getAvailablePorts();
+           
         }
 
         void getAvailablePorts()
@@ -77,10 +79,15 @@ namespace Roboterarm
                 }
                 else
                 {
+                    // Set the port name and the baudrate
                     uart.PortName = cmbbox_port.Text;
                     uart.BaudRate = Convert.ToInt32(cmbbox_baudrate.Text);
-                    uart.Open();
-
+                    uart.StopBits = StopBits.One;
+                    uart.DataBits = 8;
+                    uart.Handshake = Handshake.None;
+                    uart.RtsEnable = true;
+                    
+                    
                     btn_connect.Enabled = false;
                     btn_disconnect.Enabled = true;
                     btn_Start.Enabled = true;
@@ -91,7 +98,9 @@ namespace Roboterarm
                     label_connection.Text = "Connected";
                     label_connection.ForeColor = Color.Green;
                     LbelConnectionInfo.Text = "";
-                    //uart.DataReceived += uart_DataReceived;
+                    //generate an event on Data receive
+                    uart.DataReceived += uart_DataReceived;
+                    uart.Open();
                 }
             }
             catch
@@ -127,6 +136,7 @@ namespace Roboterarm
             btn_Start.Enabled = true;
             btn_Stop.BackColor = Color.FromArgb(0xF0F0F0);
             btn_Start.BackColor = Color.Lime;
+            uart.Write("Left");
         }
 
         private void btn_Start_Click(object sender, EventArgs e)
@@ -140,10 +150,31 @@ namespace Roboterarm
             btn_Stop.Enabled = true;
             btn_Start.BackColor = Color.FromArgb(0xF0F0F0);
             btn_Stop.BackColor = Color.Red;
+            
+        
+            uart.Write("Right");
+            
         }
 
         /* put only number in text box */
         private void txtbox_S1_distance_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Confirm_textbox(sender, e);
+        }
+        /* put only number in text box */
+        private void txtbox_S2_distance_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Confirm_textbox(sender, e);
+        }
+
+        private void uart_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string indata = sp.ReadExisting();
+            Console.Write(indata);
+        }
+        /* allow only number in text box */
+        private void Confirm_textbox(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
@@ -156,19 +187,30 @@ namespace Roboterarm
                 e.Handled = true;
             }
         }
-        /* put only number in text box */
-        private void txtbox_S2_distance_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&(e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
 
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+        private void btn_S1Right_KeyDown(object sender, KeyEventArgs e)
+        {
+            uart.Write("Right");
+        }
+
+        private void btn_S1Right_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            uart.Write("Right");
+            
+        }
+        private bool _run = false;
+        private void btn_S2Right_MouseDown(object sender, MouseEventArgs e)
+        {
+            //uart.Write("Right");
+            
+            Button x = (Button)sender;
+            _run = true;
+            
+        }
+
+        private void btn_S2Right_MouseUp(object sender, MouseEventArgs e)
+        {
+            _run = false;
         }
 
     }
