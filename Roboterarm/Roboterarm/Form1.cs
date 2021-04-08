@@ -19,7 +19,19 @@ namespace Roboterarm
             InitializeComponent();
             uart.Encoding = Encoding.UTF8;
             getAvailablePorts();
-           
+
+            /*
+            GUI2Roboter g = new GUI2Roboter();
+            teststruct tes = new teststruct();
+            Roboter2GUI sl = new Roboter2GUI();
+            definitions_Client d = new definitions_Client();
+            Console.WriteLine(System.Runtime.InteropServices.Marshal.SizeOf(g));
+            Console.WriteLine(System.Runtime.InteropServices.Marshal.SizeOf(tes));
+            Console.WriteLine(System.Runtime.InteropServices.Marshal.SizeOf(sl));
+            g.cmd = 123;
+            g.length = 76;
+            Console.WriteLine(d.CollectGUI2Roboter2String(g));
+            */
         }
 
         void getAvailablePorts()

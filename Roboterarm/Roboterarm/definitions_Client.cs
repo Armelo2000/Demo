@@ -8,9 +8,10 @@ using System.Windows.Forms;
 
 namespace Roboterarm
 {
-	struct GUI2Roboter{
-        public byte cmd;
+	struct GUI2Roboter{ // 30 bytes
+        public ushort cmd;
         public byte length;
+        public byte unit;
         public float sensor1MinPos;
         public float sensor2MinPos;
         public float sensor1MaxPos;
@@ -18,8 +19,8 @@ namespace Roboterarm
         public float sensor1Pos;
         public float sensor2Pos;
         public ushort crc16;
-        public GUI2Roboter(byte cmd, byte length, float sensor1MinPos, float sensor2MinPos, 
-            float sensor1MaxPos, float sensor2MaxPos, float sensor1Pos, float sensor2Pos, ushort crc16)
+        public GUI2Roboter(ushort cmd = 0, byte length = 0, float sensor1MinPos = 0f, float sensor2MinPos = 0f, 
+            float sensor1MaxPos= 0f, float sensor2MaxPos = 0f, float sensor1Pos = 0f, float sensor2Pos = 0f, byte unit = 0, ushort crc16 = 0)
         {
             this.cmd = cmd;
             this.length = length;
@@ -29,25 +30,37 @@ namespace Roboterarm
             this.sensor2MaxPos = sensor2MaxPos;
             this.sensor1Pos = sensor1Pos;
             this.sensor2Pos = sensor2Pos;
+            this.unit = unit;
             this.crc16 = crc16;
         }
 		
 	};
-	struct Roboter2GUI{
-		public byte cmd;
+	struct Roboter2GUI{ // 14 bytes
+		public ushort cmd;
         public byte length;
+        public byte unit;
         public float sensor1Pos;
         public float sensor2Pos;
         public ushort crc16;
-        public Roboter2GUI(byte cmd, byte length, float sensor1Pos, float sensor2Pos, ushort crc16)
+        public Roboter2GUI(ushort cmd = 0, byte length = 0, float sensor1Pos = 0f, float sensor2Pos = 0f, byte unit = 0, ushort crc16 = 0)
         {
             this.cmd = cmd;
             this.length = length;
             this.sensor1Pos = sensor1Pos;
             this.sensor2Pos = sensor2Pos;
+            this.unit = unit;
             this.crc16 = crc16;
         }
 	};
+
+    struct teststruct
+    {
+        //public byte x1;
+        //public byte x2;
+        //public byte x3;
+        public float x5;
+        //public byte x4;
+    };
     class definitions_Client
     {
         public enum ColorIndex
@@ -55,43 +68,17 @@ namespace Roboterarm
             RedColor = 0,
             GreenColor
         }
-    }
 
-    public class myKeyPressClass
-    {
-        static long keyPressCount = 0;
-        static long backspacePressed = 0;
-        static long returnPressed = 0;
-        static long escPressed = 0;
-        public TextBox textBox1 = new TextBox();
-        public void myKeyCounter(object sender, KeyPressEventArgs ex)
+        public String CollectGUI2Roboter2String(GUI2Roboter tStruct)
         {
-            switch (ex.KeyChar)
-            {
-                // Counts the backspaces.
-                case '\b':
-                    backspacePressed = backspacePressed + 1;
-                    break;
-                // Counts the ENTER keys.
-                case '\r':
-                    returnPressed = returnPressed + 1;
-                    break;
-                // Counts the ESC keys.  
-                case (char)27:
-                    escPressed = escPressed + 1;
-                    break;
-                // Counts all other keys.
-                default:
-                    keyPressCount = keyPressCount + 1;
-                    break;
-            }
-
-            textBox1.Text =
-                backspacePressed + " backspaces pressed\r\n" +
-                escPressed + " escapes pressed\r\n" +
-                returnPressed + " returns pressed\r\n" +
-                keyPressCount + " other keys pressed\r\n";
-            ex.Handled = true;
+            return ($"{tStruct.cmd}:{tStruct.length}:{tStruct.unit}:{tStruct.sensor1MinPos}:{tStruct.sensor2MinPos}:{tStruct.sensor1MaxPos}:{tStruct.sensor2MaxPos}:" +
+                $"{tStruct.sensor1Pos}:{tStruct.sensor2Pos}:{tStruct.crc16}");
+        }
+        public String CollectRoboter2GUI2String(Roboter2GUI tStruct)
+        {
+            return ($"{tStruct.cmd}:{tStruct.length}:{tStruct.unit}:" +
+                $"{tStruct.sensor1Pos}:{tStruct.sensor2Pos}:{tStruct.crc16}:");
         }
     }
+
 }
