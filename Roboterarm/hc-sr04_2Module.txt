@@ -38,6 +38,8 @@ float duration1; // Stores First HC-SR04 pulse duration value
 float duration2; // Stores Second HC-SR04 pulse duration value
 float distance1; // Stores calculated distance in cm for First Sensor
 float distance2; // Stores calculated distance in cm for Second Sensor
+float distanceTarget = 0; // Stores the distance in cm to reach
+
 float soundsp;  // Stores calculated speed of sound in M/S
 float soundcm;  // Stores calculated speed of sound in cm/ms
 int iterations = 5;
@@ -111,6 +113,18 @@ void loop()
     }
   
   Serial.println(" ");
+  
+  //Check if the distances are equal
+  if(IsDistanceEqual()){
+    //stop both motors
+    // ToDo : implement the function for the next step
+  }
+  else {
+
+
+
+  }
+
 }
 
 bool IsDistanceEqual(void){
@@ -134,5 +148,17 @@ bool IsDistanceEqual(void){
 
 void motorCtrl(void)
 {
+
+}
+
+
+void moveback(){
+
+
+}
+
+
+void moveforward(){
+
 
 }
