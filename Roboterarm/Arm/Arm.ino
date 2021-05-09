@@ -87,6 +87,7 @@ void Run(){
    
       if (distance1 >= 400 || distance1 <= 2) {
       Serial.print("Out of range");
+      Serial.print(distance1);
       }
       else {
       Serial.print(distance1);
@@ -97,6 +98,7 @@ void Run(){
    
       if (distance2 >= 400 || distance2 <= 2) {
       Serial.print("Out of range");
+      Serial.print(distance2);
       }
       else {
       Serial.print(distance2);
@@ -124,17 +126,28 @@ void setup() {
   //attachInterrupt(digitalPinToInterrupt(BUTTON), Run, FALLING);
   //attachInterrupt(digitalPinToInterrupt(BUTTON), runs, FALLING);
   //sei();
-  pinInterruptConfig();
+  //pinInterruptConfig();
 }
  
 void loop()
 {
-  //Serial.print(" cm");
+  //Serial.println("läuft");
   //delay(1000);
+  //MotorDrive(DIR_1, PUL_1, 1);
+  //delay(1000);
+  for(int i=0; i<200; i++)
+  MotorDrive(DIR_1, PUL_1, 0);
   if(bFlagStart){
-    Run();
+    //Run();
     bFlagStart = false;
+    Serial.println("Run...");
   }
+  Serial.println("Start1...");
+  //Serial.println("Start2...");
+  //Serial.println("Start3...");
+  //Serial.println("Start4...");
+  //Serial.println("Start5...");
+  delay(200);
 }
 
 
@@ -170,9 +183,11 @@ void motorCtrl(void)
 void MotorDrive(uint8_t pinDir, uint8_t pinPull, bool setdir){
     digitalWrite(pinDir, setdir);
     digitalWrite(pinPull, HIGH);
-    delayMicroseconds(5000);
+    //delay(500);
+    delayMicroseconds(500);
     digitalWrite(pinPull, LOW);
-    delayMicroseconds(5000);
+    delayMicroseconds(500);
+    //delay(500);
 }
 
 void MotorStop(uint8_t pinPull){
