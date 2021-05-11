@@ -17,8 +17,8 @@
 #define ECHO_PIN_1     		9
 
 /* Sensor 2  Pin */
-#define TRIGGER_PIN_2  		5
-#define ECHO_PIN_2     		4
+#define TRIGGER_PIN_2  		11
+#define ECHO_PIN_2     		12
 
 /* Motor 1 Pin */
 #define PUL_1     4    // PUL- pin
@@ -108,7 +108,7 @@ void Run(){
      Serial.println(" ");
     
     //Check if the distances are equal
-    motorCtrl();
+    //motorCtrl();
   }
     
 }
@@ -143,6 +143,7 @@ void loop()
     bFlagStart = false;
     Serial.println("Run...");
   }
+  Run();
   //Serial.println("Start1...");
   //Serial.println("Start2...");
   //Serial.println("Start3...");
@@ -272,8 +273,8 @@ void Timer1_Init(void){
 ISR(TIMER1_COMPA_vect) { 
   static uint32_t uiCnt = 0;
   uiCnt++;
-  if(uiCnt >= 200){
-    MotorDrive(DIR_1, PUL_1, 1);
+  if(uiCnt >= 150){
+    MotorDriveInt(DIR_1, PUL_1, 0);
     uiCnt = 0;
   }
 }
