@@ -127,6 +127,7 @@ void setup() {
   //attachInterrupt(digitalPinToInterrupt(BUTTON), runs, FALLING);
   //sei();
   //pinInterruptConfig();
+  Timer1_Init();
 }
  
 void loop()
@@ -135,19 +136,24 @@ void loop()
   //delay(1000);
   //MotorDrive(DIR_1, PUL_1, 1);
   //delay(1000);
-  for(int i=0; i<200; i++)
-  MotorDrive(DIR_1, PUL_1, 0);
+  //for(int i=0; i<200; i++)
+  //MotorDrive(DIR_1, PUL_1, 0);
   if(bFlagStart){
     //Run();
     bFlagStart = false;
     Serial.println("Run...");
   }
-  Serial.println("Start1...");
+  //Serial.println("Start1...");
   //Serial.println("Start2...");
   //Serial.println("Start3...");
   //Serial.println("Start4...");
   //Serial.println("Start5...");
-  delay(200);
+  delay(200000);
+  duration1 = pulseIn(ECHO_PIN_1, HIGH);
+  duration1 = sonar1.ping_median(iterations);
+  
+  //duration1 = sonar1.ping_median(iterations);
+  //duration1 = pulseIn(ECHO_PIN_1, HIGH);//sonar1.ping_median(iterations);
 }
 
 
@@ -219,4 +225,55 @@ void pinInterruptConfig()
    PCMSK0 |= (1 << PCINT7);
    PCICR |= (1 << PCIE0);
    sei();
+}
+
+void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir){
+    digitalWrite(pinDir, setdir);
+    //PIND |= (1<<PIND4);
+    digitalWrite(pinPull, !digitalRead(pinPull));
+    //delayMicroseconds(500);
+    
+}
+
+void Timer1_Init(void){
+   // reset
+ TCCR1A = 0; // set TCCR1A register to 0
+ TCCR1B = 0; // set TCCR1B register to 0
+ TCNT1 = 0; // reset counter value
+
+ /* Values in Output compare register with 16MHz clock and 1024 prescaler
+  *  - 3125 --> for each 200ms
+  *  - 15625 --> for each 1s
+  *  - 31250--> for each 2s
+  */
+ OCR1A = 160; //15625; //3125 for 200ms in
+ // set prescaler
+/*
+ CS12 CS11 CS10 Description
+0 0 0 No clock source (Timer/Counter stopped).
+0 0 1 clkI/O/1 (no prescaling)
+0 1 0 clkI/O/8 (from prescaler)
+0 1 1 clkI/O/64 (from prescaler)
+1 0 0 clkI/O/256 (from prescaler)
+1 0 1 clkI/O/1024 (from prescaler)
+1 1 0 External clock source on T1 pin. Clock on falling edge.
+1 1 1 External clock source on T1 pin. Clock on rising edge.
+*/ 
+ TCCR1B |= (0 << CS12) | (0 << CS11) | (1 << CS10); //No Prescale 
+// 16MHz/1024=15625Hz mit OCR1A=31249 Interrupt alle 2s
+// TCCR1A = (1<<2)|(1<<4)|(1<<6);
+ 
+ TCCR1B |= (1 << WGM12); // turn on CTC mode
+ TIMSK1 |= (1 << OCIE1A); // enable timer compare interrupt
+ //pinInterruptConfig();
+ sei(); // allow interrupts
+}
+
+ISR(TIMER1_COMPA_vect) { 
+  static uint32_t uiCnt = 0;
+  uiCnt++;
+  if(uiCnt >= 200){
+    MotorDrive(DIR_1, PUL_1, 1);
+    uiCnt = 0;
+  }
 }
