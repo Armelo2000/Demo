@@ -273,8 +273,11 @@ void Timer1_Init(void){
 ISR(TIMER1_COMPA_vect) { 
   static uint32_t uiCnt = 0;
   uiCnt++;
-  if(uiCnt >= 150){
-    MotorDriveInt(DIR_1, PUL_1, 0);
+  if(uiCnt >= 400){
+    //The Timer is called each 10us and 30 als counter mean 300us
+    //maximum speed is related to 1 step per 300us
+    //minimum speed is related to 1 step per 6000us
+    MotorDriveInt(DIR_1, PUL_1, 1);
     uiCnt = 0;
   }
 }
