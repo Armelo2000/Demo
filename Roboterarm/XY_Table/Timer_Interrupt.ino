@@ -28,19 +28,24 @@ void Timer1_Init(void){
 
 ISR(TIMER1_COMPA_vect) { 
   static uint32_t uiCnt = 0;
-  uiCnt++;
-  if(uiCnt >= 400){
-    //The Timer is called each 10us and 30 as counter value mean 300us
-    //maximum speed is related to 1 step per 300us  -> uiCnt = 30
-    //minimum speed is related to 1 step per 6000us -> uiCnt = 600
-    if(!position1_Ok){
-      //keep run the Motor 1 if the target position 1 is not reached
-      MotorDriveInt(DIR_1, PUL_1, DirMotor_1);
+  // Check if the button was pressed!
+  if(bButtonPressed == YES)
+  {
+    // YES. It was pressed. The Motor run
+    uiCnt++;
+    if(uiCnt >= 400){
+      //The Timer is called each 10us and 30 as counter value mean 300us
+      //maximum speed is related to 1 step per 300us  -> uiCnt = 30
+      //minimum speed is related to 1 step per 6000us -> uiCnt = 600
+      if(!position1_Ok){
+        //keep run the Motor 1 if the target position 1 is not reached
+        MotorDriveInt(DIR_1, PUL_1, DirMotor_1);
+      }
+      if(!position2_Ok){
+        //keep run the Motor 2 if the target position 2 is not reached
+        MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
+      }
+      uiCnt = 0;
     }
-    if(!position2_Ok){
-      //keep run the Motor 2 if the target position 2 is not reached
-      MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
-    }
-    uiCnt = 0;
   }
 }

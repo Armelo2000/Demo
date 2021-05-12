@@ -11,7 +11,7 @@ void pinInterruptConfig()
 ISR (PCINT0_vect)
 {
   Serial.println("Start...");
-  bFlagStart = true;
+  bButtonPressed = true;
   position1_Ok = false;
   position2_Ok = false;
 }

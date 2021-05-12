@@ -5,6 +5,8 @@
 
 #define LEFT          0
 #define RIGHT         1
+#define YES           1
+#define NO            0
 
 /* Button */
 #define BUTTON        13
@@ -36,9 +38,9 @@ NewPing sonar1(TRIGGER_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
 NewPing sonar2(TRIGGER_PIN_2, ECHO_PIN_2, MAX_DISTANCE);
  
 /* Motor 1 direction  */
-bool DirMotor_1 = 0;  // used to reverse motor direction
+bool DirMotor_1 = 0;  // used to set the direction of motor 1
 /* Motor 2 direction  */
-bool DirMotor_2 = 0;  // used to reverse motor direction
+bool DirMotor_2 = 0;  // used to set the direction of motor 2
 
 // Sensor
 float duration1; // Stores First HC-SR04 pulse duration value
@@ -49,7 +51,7 @@ static bool position1_Ok = false;  // flag for position 1 ok
 static bool position2_Ok = false;  // flag for position 2 ok
 
 // Flag to start the programm
-static bool bFlagStart = false;
+static bool bButtonPressed = false;
 
 float soundcm;  // Stores calculated speed of sound in cm/ms
 int iterations = 5;

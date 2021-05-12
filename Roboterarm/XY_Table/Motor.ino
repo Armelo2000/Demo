@@ -40,6 +40,11 @@ void motorCtrl(void)
     Serial.println("Position 2 OK");
     position2_Ok = true;
   }
+
+  if((position1_Ok == true) && (position2_Ok == true) && (bButtonPressed == YES)){
+     // reset the Button press
+     bButtonPressed = (bool)NO; 
+  }
 }
 
 void Run(){
@@ -89,7 +94,7 @@ void Run(){
     
      Serial.println(" ");
     
-    //Check if the distances are equal
+    //Control the Motor direction 
     motorCtrl();
   }
     

@@ -5,9 +5,8 @@
  
 void loop()
 {
-  if(bFlagStart){
-    //Run();
-    bFlagStart = false;
+  if(bButtonPressed){
+    bButtonPressed = false;
     Serial.println("Run...");
   }
   Run();
