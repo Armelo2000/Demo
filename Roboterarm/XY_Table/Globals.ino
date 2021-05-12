@@ -30,6 +30,8 @@
 
 /* Distance */
 #define MAX_DISTANCE    400
+#define MIN_DISTANCE    2
+
 #define TARGET_DISTANCE   7
 #define OFFSET_DISTANCE   ((float)0.3)
 
@@ -49,6 +51,10 @@ bool DirMotor_2 = 0;  // used to set the direction of motor 2
 // Motor Speed
 int SpeedMotor_1 = 0;  // Speed of Motor 1
 int SpeedMotor_2 = 0;  // Speed of Motor 2
+
+// Sensor Out of Range
+bool bSensor1_Out_Range = NO;
+bool bSensor2_Out_Range = NO;
 
 // Sensor
 float duration1; // Stores First HC-SR04 pulse duration value
