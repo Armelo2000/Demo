@@ -49,7 +49,7 @@ void motorCtrl(void)
 
 void Run(){
 
-  while(!position1_Ok){
+  while((position1_Ok == false) || (position2_Ok == false)){
     //The code run here
     delay(250);  
   

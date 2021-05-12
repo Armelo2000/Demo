@@ -33,6 +33,10 @@
 #define TARGET_DISTANCE   7
 #define OFFSET_DISTANCE   ((float)0.3)
 
+/* Motor Speed */
+#define MIN_SPEED       30
+#define MAX_SPEED       600
+
 // Initialize the ultraschall sensors
 NewPing sonar1(TRIGGER_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
 NewPing sonar2(TRIGGER_PIN_2, ECHO_PIN_2, MAX_DISTANCE);
@@ -41,6 +45,10 @@ NewPing sonar2(TRIGGER_PIN_2, ECHO_PIN_2, MAX_DISTANCE);
 bool DirMotor_1 = 0;  // used to set the direction of motor 1
 /* Motor 2 direction  */
 bool DirMotor_2 = 0;  // used to set the direction of motor 2
+
+// Motor Speed
+int SpeedMotor_1 = 0;  // Speed of Motor 1
+int SpeedMotor_2 = 0;  // Speed of Motor 2
 
 // Sensor
 float duration1; // Stores First HC-SR04 pulse duration value
