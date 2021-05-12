@@ -41,9 +41,10 @@ void motorCtrl(void)
     position2_Ok = true;
   }
 
-  if((position1_Ok == true) && (position2_Ok == true) && (bButtonPressed == YES)){
+  if((position1_Ok == true) /*&& (position2_Ok == true)*/ && (bButtonPressed == YES)){
      // reset the Button press
      bButtonPressed = (bool)NO; 
+     digitalWrite(LED, LOW);
   }
 }
 

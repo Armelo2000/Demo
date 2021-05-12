@@ -2,6 +2,7 @@
   Dual HC-SR04 
   Displays results on Serial Monitor
 */
+#include "Globals.h"
  
 void loop()
 {
@@ -12,5 +13,5 @@ void loop()
   }
   Run();
   //Serial.println("Start1...");
-  delay(200000);
+  delay(1000);
 }

@@ -28,13 +28,22 @@ void Timer1_Init(void){
 
 ISR(TIMER1_COMPA_vect) { 
   static uint32_t uiCnt = 0;
+  static uint32_t uiLedBlinkTimer = 0;
   // Check if the button was pressed!
   if(bButtonPressed == YES)
   {
     // YES. It was pressed. The Motor run
     uiCnt++;
+    uiLedBlinkTimer++;
+    if(uiLedBlinkTimer >= 50000){
+      // LED Blink every second
+      //Toggle the LED pin each 500ms
+      digitalWrite(LED, !digitalRead(LED)); 
+      // Reset the counter for LED Blink
+      uiLedBlinkTimer = 0;
+    }
     if(uiCnt >= 400){
-      //The Timer is called each 10us and 30 as counter value mean 300us
+      //The Timer is called each 10us. The value 30 as counter mean 300us
       //maximum speed is related to 1 step per 300us  -> uiCnt = 30
       //minimum speed is related to 1 step per 6000us -> uiCnt = 600
       if(!position1_Ok){

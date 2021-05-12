@@ -9,6 +9,9 @@ void setup() {
   // initialize pin for Motor 2
   pinMode (PUL_2, OUTPUT);
   pinMode (DIR_2, OUTPUT);
+
+  // initialize the LED Pin
+  pinMode (LED, OUTPUT);
   
   Serial.begin (9600);
   
