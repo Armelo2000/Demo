@@ -10,6 +10,14 @@ void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir){
 void motorCtrl(void)
 {
 /********************** Sensor 1 ********************************/
+  Serial.print("Distance 1: ");
+  if(bSensor1_Out_Range){
+    Serial.print("Out of range");
+  }else{
+    Serial.print(distance1);
+    Serial.print(" cm ");
+  }
+  
   if(distance1 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
     //MotorDrive(DIR_1, PUL_1, 1);  // forward
     DirMotor_1 = (bool)RIGHT;  
@@ -20,12 +28,20 @@ void motorCtrl(void)
   }
   else{
     //Motor 1 Stop
-    digitalWrite(PUL_1, LOW);
-    Serial.println("Position 1 OK");
     position1_Ok = true;
+    digitalWrite(PUL_1, LOW);
+    Serial.print("-> Position 1 OK ");    
   }
   
 /********************** Sensor 2 ********************************/
+  Serial.print("*********** Distance 2: ");
+  if(bSensor2_Out_Range){
+    Serial.print("Out of range");
+  }else{
+    Serial.print(distance2);
+    Serial.print(" cm ");
+  }
+  
   if(distance2 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
     //MotorDrive(DIR_2, PUL_2, 1);  // forward
     DirMotor_2 = (bool)RIGHT;
@@ -36,9 +52,9 @@ void motorCtrl(void)
   }
   else{
     //Motor 2 Stop
-    digitalWrite(PUL_2, LOW);
-    Serial.println("Position 2 OK");
     position2_Ok = true;
+    digitalWrite(PUL_2, LOW);
+    Serial.print("-> Position 2 OK ");  
   }
 
   if((position1_Ok == true) /*&& (position2_Ok == true)*/ && (bButtonPressed == YES)){
@@ -46,6 +62,7 @@ void motorCtrl(void)
      bButtonPressed = (bool)NO; 
      digitalWrite(LED, LOW);
   }
+  Serial.println(" ");
 }
 
 void Run(){
@@ -75,33 +92,31 @@ void Run(){
     //SpeedMotor_1 = map(distance1, 0, 400, MIN_SPEED, MAX_SPEED);
     
     // Send results to Serial Monitor
-    Serial.print("Distance 1: ");
+    //Serial.print("Distance 1: ");
    
       if (distance1 >= MAX_DISTANCE || distance1 <= MIN_DISTANCE) {
         bSensor1_Out_Range = YES;
-        Serial.print("Out of range");
-        Serial.print(distance1);
+        //Serial.print("Out of range");
       }
       else {
         bSensor1_Out_Range = NO;
-        Serial.print(distance1);
-        Serial.print(" cm ");
+        //Serial.print(distance1);
+        //Serial.print(" cm ");
       }
       
-      Serial.print("Distance 2: ");
+      //Serial.print("Distance 2: ");
    
       if (distance2 >= MAX_DISTANCE || distance2 <= MIN_DISTANCE) {
         bSensor2_Out_Range = YES;
-        Serial.print("Out of range");
-        Serial.print(distance2);
+        //Serial.print("Out of range");
       }
       else {
         bSensor2_Out_Range = NO;
-        Serial.print(distance2);
-        Serial.print(" cm");
+        //Serial.print(distance2);
+        //Serial.print(" cm");
       }
     
-     Serial.println(" ");
+     //Serial.println(" ");
     
     //Control the Motor direction 
     motorCtrl();

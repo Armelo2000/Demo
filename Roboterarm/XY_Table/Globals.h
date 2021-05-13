@@ -32,7 +32,7 @@
 #define DIR_2     7    // DIR- pin
 
 /* Distance */
-#define MAX_DISTANCE    400
+#define MAX_DISTANCE    40 //400 is the maximum range of HC-SR04 (Each axis is only 50)
 #define MIN_DISTANCE    2
 
 #define TARGET_DISTANCE   7
@@ -68,7 +68,7 @@ static bool position1_Ok = false;  // flag for position 1 ok
 static bool position2_Ok = false;  // flag for position 2 ok
 
 // Flag to start the programm
-static bool bButtonPressed = false;
+volatile bool bButtonPressed = false;
 
 float soundcm;  // Stores calculated speed of sound in cm/ms
 int iterations = 5;

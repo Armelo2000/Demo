@@ -38,19 +38,20 @@ ISR(TIMER1_COMPA_vect) {
     if(uiLedBlinkTimer >= 50000){
       // LED Blink every second
       //Toggle the LED pin each 500ms
-      digitalWrite(LED, !digitalRead(LED)); 
+      //digitalWrite(LED, !digitalRead(LED)); 
+      //PINH |= (1 << PINH5);
       // Reset the counter for LED Blink
       uiLedBlinkTimer = 0;
     }
-    if(uiCnt >= 400){
+    if(uiCnt >= 100){
       //The Timer is called each 10us. The value 30 as counter mean 300us
       //maximum speed is related to 1 step per 300us  -> uiCnt = 30
       //minimum speed is related to 1 step per 6000us -> uiCnt = 600
-      if(!position1_Ok){
+      if(!position1_Ok &&(bSensor1_Out_Range == NO)){
         //keep run the Motor 1 if the target position 1 is not reached
         MotorDriveInt(DIR_1, PUL_1, DirMotor_1);
       }
-      if(!position2_Ok){
+      if(!position2_Ok && (bSensor2_Out_Range == NO)){
         //keep run the Motor 2 if the target position 2 is not reached
         MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
       }
