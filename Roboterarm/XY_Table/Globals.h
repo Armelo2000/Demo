@@ -3,8 +3,8 @@
  
 // Define Constants
 
-#define LEFT          0
-#define RIGHT         1
+#define LEFT          1
+#define RIGHT         0
 #define YES           1
 #define NO            0
 
@@ -41,6 +41,9 @@
 /* Motor Speed */
 #define MIN_SPEED       30
 #define MAX_SPEED       600
+// Motor pulse
+#define M1_MAX_PULSE_COUNT       30000 // ? ToDo
+#define M1_MAX_PULSE_COUNT       30000 // ? ToDo
 
 // Initialize the ultraschall sensors
 NewPing sonar1(TRIGGER_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
@@ -72,3 +75,6 @@ volatile bool bButtonPressed = false;
 
 float soundcm;  // Stores calculated speed of sound in cm/ms
 int iterations = 5;
+
+int Motor_1_Pulse_Count = 0;
+int Motor_2_Pulse_Count = 0;
