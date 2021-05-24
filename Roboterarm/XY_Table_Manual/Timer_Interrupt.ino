@@ -55,7 +55,7 @@ ISR(TIMER1_COMPA_vect) {
       //if(!position2_Ok && (bSensor2_Out_Range == NO)){
       if(digitalRead(BUTTON)){
         //keep run the Motor 2 if the target position 2 is not reached
-        MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
+        //MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
       }
       uiCnt = 0;
     }

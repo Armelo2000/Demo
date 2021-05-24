@@ -3,8 +3,8 @@
  
 // Define Constants
 
-#define LEFT          1
-#define RIGHT         0
+#define LEFT          0
+#define RIGHT         1
 #define YES           1
 #define NO            0
 
