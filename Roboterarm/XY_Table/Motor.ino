@@ -20,11 +20,11 @@ void motorCtrl(void)
   
   if(distance1 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
     //MotorDrive(DIR_1, PUL_1, 1);  // forward
-    DirMotor_1 = (bool)RIGHT;  
+    DirMotor_1 = (bool)LEFT;  
   }
   else if(distance1 < (TARGET_DISTANCE - OFFSET_DISTANCE)){
     //MotorDrive(DIR_1, PUL_1, 0);  // back
-    DirMotor_1 = (bool)LEFT;
+    DirMotor_1 = (bool)RIGHT;
   }
   else{
     //Motor 1 Stop
@@ -44,11 +44,11 @@ void motorCtrl(void)
   
   if(distance2 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
     //MotorDrive(DIR_2, PUL_2, 1);  // forward
-    DirMotor_2 = (bool)RIGHT;
+    DirMotor_2 = (bool)LEFT;
   }
   else if(distance2 < (TARGET_DISTANCE - OFFSET_DISTANCE)){
     //MotorDrive(DIR_2, PUL_2, 0);  // back
-    DirMotor_2 = (bool)LEFT;
+    DirMotor_2 = (bool)RIGHT;
   }
   else{
     //Motor 2 Stop

@@ -3,8 +3,8 @@
  
 // Define Constants
 
-#define LEFT          1
-#define RIGHT         0
+#define LEFT          0
+#define RIGHT         1
 #define YES           1
 #define NO            0
 
@@ -35,7 +35,7 @@
 #define MAX_DISTANCE    40 //400 is the maximum range of HC-SR04 (Each axis is only 50)
 #define MIN_DISTANCE    2
 
-#define TARGET_DISTANCE   7
+#define TARGET_DISTANCE   10
 #define OFFSET_DISTANCE   ((float)0.3)
 
 /* Motor Speed */

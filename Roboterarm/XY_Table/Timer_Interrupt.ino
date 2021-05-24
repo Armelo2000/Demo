@@ -43,7 +43,7 @@ ISR(TIMER1_COMPA_vect) {
       // Reset the counter for LED Blink
       uiLedBlinkTimer = 0;
     }
-    if(uiCnt >= 100){
+    if(uiCnt >= 300){
       //The Timer is called each 10us. The value 30 as counter mean 300us
       //maximum speed is related to 1 step per 300us  -> uiCnt = 30
       //minimum speed is related to 1 step per 6000us -> uiCnt = 600
@@ -53,7 +53,7 @@ ISR(TIMER1_COMPA_vect) {
       }
       if(!position2_Ok && (bSensor2_Out_Range == NO)){
         //keep run the Motor 2 if the target position 2 is not reached
-        MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
+        //MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
       }
       uiCnt = 0;
     }
