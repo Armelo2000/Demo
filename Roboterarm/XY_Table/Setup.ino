@@ -1,8 +1,6 @@
 
 void setup() {
 
-  // Disable Interrupts
-  cli();
   // initialize pin for Motor 1
   pinMode (PUL_1, OUTPUT);
   pinMode (DIR_1, OUTPUT);
@@ -14,10 +12,16 @@ void setup() {
   pinMode (LED, OUTPUT);
   
   Serial.begin (9600);
-  
+  //init the lcd
+  lcd_init();
+  tSensorX.prevMsgId = 0xFF;
+  tSensorY.prevMsgId = 0xFF;
+  // Disable Interrupts
+  cli();
   // Button Init
   pinInterruptConfig();
   // Timer Init
   Timer1_Init();
   sei(); // allow interrupts
+  
 }

@@ -10,36 +10,63 @@ void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir){
 void motorCtrl(void)
 {
 /********************** Sensor 1 ********************************/
+  static bool lcd_display_x_out = false;
+  static bool lcd_display_y_out = false;
+  
   Serial.print("Distance 1: ");
   if(bSensor1_Out_Range){
+    if(!lcd_display_x_out){
+      displayDistanceOut(3, 0, "---.--");
+      lcd_display_x_out = true;
+    }
+    tSensorX.lcd_sensor_status = " OUT  ";
+    tSensorX.msgId = 0;
     Serial.print("Out of range");
   }else{
+    displayDistance(3, 0, distance1);
+    tSensorX.lcd_sensor_status = "Messen";
+    tSensorX.msgId = 1;
+    
+    lcd_display_x_out = false;
     Serial.print(distance1);
-    Serial.print(" cm ");
+    Serial.print(" mm ");
   }
   
   if(distance1 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
     //MotorDrive(DIR_1, PUL_1, 1);  // forward
-    DirMotor_1 = (bool)LEFT;  
+    DirMotor_1 = (bool)LEFT; 
   }
   else if(distance1 < (TARGET_DISTANCE - OFFSET_DISTANCE)){
     //MotorDrive(DIR_1, PUL_1, 0);  // back
     DirMotor_1 = (bool)RIGHT;
   }
   else{
+    tSensorX.lcd_sensor_status = "P. OK ";
+    tSensorX.msgId = 2;
     //Motor 1 Stop
     position1_Ok = true;
     digitalWrite(PUL_1, LOW);
     Serial.print("-> Position 1 OK ");    
   }
+  lcd_display_info(14, 0, &tSensorX);
   
 /********************** Sensor 2 ********************************/
   Serial.print("*********** Distance 2: ");
   if(bSensor2_Out_Range){
+    if(!lcd_display_y_out){
+      displayDistanceOut(3, 1, "---.--");
+      lcd_display_y_out = true;
+    }
+    tSensorY.lcd_sensor_status = " OUT  ";
+    tSensorY.msgId = 0;
     Serial.print("Out of range");
   }else{
+    displayDistance(3, 1, distance2);
+    tSensorY.lcd_sensor_status = "Messen";
+    tSensorY.msgId = 1;
+    lcd_display_y_out = false;
     Serial.print(distance2);
-    Serial.print(" cm ");
+    Serial.print(" mm ");
   }
   
   if(distance2 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
@@ -51,11 +78,14 @@ void motorCtrl(void)
     DirMotor_2 = (bool)RIGHT;
   }
   else{
+    tSensorY.lcd_sensor_status = "P. OK ";
+    tSensorY.msgId = 2;
     //Motor 2 Stop
     position2_Ok = true;
     digitalWrite(PUL_2, LOW);
     Serial.print("-> Position 2 OK ");  
   }
+lcd_display_info(14, 1, &tSensorY);
 
   if((position1_Ok == true) /*&& (position2_Ok == true)*/ && (bButtonPressed == YES)){
      // reset the Button press
@@ -70,9 +100,9 @@ void Run(){
   while((position1_Ok == false) || (position2_Ok == false)){
     //The code run here
     //delay(250);  
-  
+    delay(100);
     // The standard speed of 0.0343 cm/ms is used  
-    soundcm = 0.0343;
+    //soundcm = 0.0343;
     
     // Measure duration for first sensor  
     duration1 = sonar1.ping_median(iterations);
@@ -85,11 +115,12 @@ void Run(){
     duration2 = sonar2.ping_median(iterations);
     
     // Calculate the distances for both sensors
-    distance1 = (duration1 / 2) * soundcm;
-    distance2 = (duration2 / 2) * soundcm;
+    distance1 = float((duration1 / 2) * soundmm);
+    distance2 = float((duration2 / 2) * soundmm);
 
     //compute the speed of both motor
     //SpeedMotor_1 = map(distance1, 0, 400, MIN_SPEED, MAX_SPEED);
+    //SpeedMotor_2 = map(distance2, 0, 400, MIN_SPEED, MAX_SPEED);
     
     // Send results to Serial Monitor
     //Serial.print("Distance 1: ");
