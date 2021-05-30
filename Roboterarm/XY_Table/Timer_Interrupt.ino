@@ -49,11 +49,17 @@ ISR(TIMER1_COMPA_vect) {
       //minimum speed is related to 1 step per 6000us -> uiCnt = 600
       if(!position1_Ok &&(bSensor1_Out_Range == NO)){
         //keep run the Motor 1 if the target position 1 is not reached
-        MotorDriveInt(DIR_1, PUL_1, DirMotor_1);
+        MotorDriveInt(DIR_1_PIN, PUL_1_PIN, DirMotor_1, &Motor_Xaxis);
+      }else if(digitalRead(X_MANUAL_FORWARD)){
+        //run manually forward
+        MotorDriveInt(DIR_1_PIN, PUL_1_PIN, FORWARD, &Motor_Xaxis);
+      }else if(digitalRead(X_MANUAL_BACKWARD)){
+        //run manually backward
+        MotorDriveInt(DIR_1_PIN, PUL_1_PIN, BACKWARD, &Motor_Xaxis);        
       }
       if(!position2_Ok && (bSensor2_Out_Range == NO)){
         //keep run the Motor 2 if the target position 2 is not reached
-        //MotorDriveInt(DIR_2, PUL_2, DirMotor_2);
+        //MotorDriveInt(DIR_2_PIN, PUL_2_PIN, DirMotor_2, &Motor_Yaxis);
       }
       uiCnt = 0;
     }

@@ -18,8 +18,8 @@ ISR (PCINT0_vect) { // handle pin change interrupt for D0 to D7 here
     if (pinState == LOW) { // only falling events
       if ((millis() - previousStateChangeMillis) > debounceTime) { // debounce
         Serial.println("Start...");
-		digitalWrite(PUL_1, LOW);
-		digitalWrite(PUL_2, LOW);
+		digitalWrite(PUL_1_PIN, LOW);
+		digitalWrite(PUL_2_PIN, LOW);
         bButtonPressed = true;
         position1_Ok = false;
         position2_Ok = false;

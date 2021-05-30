@@ -3,8 +3,8 @@
  
 // Define Constants
 
-#define LEFT          0
-#define RIGHT         1
+#define FORWARD          0
+#define BACKWARD         1
 #define YES           1
 #define NO            0
 
@@ -23,19 +23,24 @@
 #define ECHO_PIN_2        12
 
 /* Motor 1 Pin */
-#define PUL_1     4    // PUL- pin
-#define DIR_1     5    // DIR- pin
+#define PUL_1_PIN     4    // PUL- pin
+#define DIR_1_PIN     5    // DIR- pin
 
 
 /* Motor 2 Pin */
-#define PUL_2     6    // PUL- pin
-#define DIR_2     7    // DIR- pin
+#define PUL_2_PIN     6    // PUL- pin
+#define DIR_2_PIN     7    // DIR- pin
+
+#define X_MANUAL_FORWARD    3
+#define X_MANUAL_BACKWARD   8
+
+//#define Y_MANUAL_FORWARD    3
+//#define Y_MANUAL_BACKWARD   8
 
 /* Distance */
-#define MAX_DISTANCE_MM   350   // 350mm is the maximum distance from origine to endpoint for this application
-#define MAX_DISTANCE      400    // 400cm is the maximum range of HC-SR04 (Each axis is only 50)
-#define MIN_DISTANCE      5     // 5cm is the minimum range 
-#define MIN_DISTANCE_MM   50    // 50mm is the minimum range for this application
+#define MAX_DISTANCE      350   // 350mm is the maximum distance from origine to endpoint for this application
+//#define MAX_DISTANCE      400    // 400cm is the maximum range of HC-SR04 (Each axis is only 50)
+#define MIN_DISTANCE      50    // 50mm is the minimum range for this application
 
 #define TARGET_DISTANCE   100
 #define OFFSET_DISTANCE   ((float)2.0)
@@ -44,8 +49,8 @@
 #define MIN_SPEED       30
 #define MAX_SPEED       600
 // Motor pulse
-#define M1_MAX_PULSE_COUNT       30000 // ? ToDo
-#define M1_MAX_PULSE_COUNT       30000 // ? ToDo
+#define MOTOR_MAX_PULSE_COUNT       0xFFFFFFFF  //30000 // ? ToDo
+
 
 // Initialize the ultraschall sensors
 NewPing sonar1(TRIGGER_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
@@ -96,5 +101,13 @@ typedef struct _lcd_message_status
   eAxis axis;
 }lcd_msg_status;
 
+typedef struct _stepper
+{
+  uint32_t impulseCount;
+}PU_StepperMotor;
+
+
 static lcd_msg_status tSensorX;
 static lcd_msg_status tSensorY;
+PU_StepperMotor Motor_Xaxis;
+PU_StepperMotor Motor_Yaxis;

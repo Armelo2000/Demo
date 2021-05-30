@@ -2,20 +2,27 @@
 void setup() {
 
   // initialize pin for Motor 1
-  pinMode (PUL_1, OUTPUT);
-  pinMode (DIR_1, OUTPUT);
+  pinMode (PUL_1_PIN, OUTPUT);
+  pinMode (DIR_1_PIN, OUTPUT);
   // initialize pin for Motor 2
-  pinMode (PUL_2, OUTPUT);
-  pinMode (DIR_2, OUTPUT);
+  pinMode (PUL_2_PIN, OUTPUT);
+  pinMode (DIR_2_PIN, OUTPUT);
 
   // initialize the LED Pin
   pinMode (LED, OUTPUT);
+
+  //Init pin for manual drive
+  pinMode(X_MANUAL_FORWARD, INPUT);
+  pinMode(X_MANUAL_BACKWARD, INPUT);
   
   Serial.begin (9600);
   //init the lcd
   lcd_init();
   tSensorX.prevMsgId = 0xFF;
   tSensorY.prevMsgId = 0xFF;
+  Motor_Xaxis.impulseCount = 0;
+  Motor_Yaxis.impulseCount = 0;
+  
   // Disable Interrupts
   cli();
   // Button Init

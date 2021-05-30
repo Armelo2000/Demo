@@ -1,10 +1,24 @@
 
-void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir){
+void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir, PU_StepperMotor *motor){
     //Set the direction
-    digitalWrite(pinDir, setdir);
-
-    //Toggle pin to generate impuls
-    digitalWrite(pinPull, !digitalRead(pinPull));   
+  if((motor->impulseCount > 0) && (motor->impulseCount < MOTOR_MAX_PULSE_COUNT)){ 
+      digitalWrite(pinDir, setdir);
+      //Toggle pin to generate impuls
+      digitalWrite(pinPull, !digitalRead(pinPull)); 
+      if(digitalRead(pinPull)){
+        //count the impulse/step for each motor
+        if(setdir == FORWARD)
+        {
+           if(motor->impulseCount < MOTOR_MAX_PULSE_COUNT){
+              motor->impulseCount++;  
+           }
+        }else{
+           if(motor->impulseCount > 0){
+              motor->impulseCount++;  
+           }        
+        }
+      }
+  }
 }
 
 void motorCtrl(void)
@@ -33,19 +47,19 @@ void motorCtrl(void)
   }
   
   if(distance1 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
-    //MotorDrive(DIR_1, PUL_1, 1);  // forward
-    DirMotor_1 = (bool)LEFT; 
+    //MotorDrive(DIR_1_PIN, PUL_1_PIN, 1);  // forward
+    DirMotor_1 = (bool)FORWARD; 
   }
   else if(distance1 < (TARGET_DISTANCE - OFFSET_DISTANCE)){
-    //MotorDrive(DIR_1, PUL_1, 0);  // back
-    DirMotor_1 = (bool)RIGHT;
+    //MotorDrive(DIR_1_PIN, PUL_1_PIN, 0);  // back
+    DirMotor_1 = (bool)BACKWARD;
   }
   else{
     tSensorX.lcd_sensor_status = "P. OK ";
     tSensorX.msgId = 2;
     //Motor 1 Stop
     position1_Ok = true;
-    digitalWrite(PUL_1, LOW);
+    digitalWrite(PUL_1_PIN, LOW);
     Serial.print("-> Position 1 OK ");    
   }
   lcd_display_info(14, 0, &tSensorX);
@@ -70,19 +84,19 @@ void motorCtrl(void)
   }
   
   if(distance2 > (TARGET_DISTANCE + OFFSET_DISTANCE)){
-    //MotorDrive(DIR_2, PUL_2, 1);  // forward
-    DirMotor_2 = (bool)LEFT;
+    //MotorDrive(DIR_2_PIN, PUL_2_PIN, 1);  // forward
+    DirMotor_2 = (bool)FORWARD;
   }
   else if(distance2 < (TARGET_DISTANCE - OFFSET_DISTANCE)){
-    //MotorDrive(DIR_2, PUL_2, 0);  // back
-    DirMotor_2 = (bool)RIGHT;
+    //MotorDrive(DIR_2_PIN, PUL_2_PIN, 0);  // back
+    DirMotor_2 = (bool)BACKWARD;
   }
   else{
     tSensorY.lcd_sensor_status = "P. OK ";
     tSensorY.msgId = 2;
     //Motor 2 Stop
     position2_Ok = true;
-    digitalWrite(PUL_2, LOW);
+    digitalWrite(PUL_2_PIN, LOW);
     Serial.print("-> Position 2 OK ");  
   }
 lcd_display_info(14, 1, &tSensorY);
