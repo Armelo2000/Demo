@@ -38,8 +38,8 @@
 //#define Y_MANUAL_BACKWARD   8
 
 /* Distance */
+// 400cm is the maximum range of HC-SR04 
 #define MAX_DISTANCE      350   // 350mm is the maximum distance from origine to endpoint for this application
-//#define MAX_DISTANCE      400    // 400cm is the maximum range of HC-SR04 (Each axis is only 50)
 #define MIN_DISTANCE      50    // 50mm is the minimum range for this application
 
 #define TARGET_DISTANCE   100
