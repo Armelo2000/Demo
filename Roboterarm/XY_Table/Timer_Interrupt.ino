@@ -59,7 +59,7 @@ ISR(TIMER1_COMPA_vect) {
       }
       if(!position2_Ok && (bSensor2_Out_Range == NO)){
         //keep run the Motor 2 if the target position 2 is not reached
-        //MotorDriveInt(DIR_2_PIN, PUL_2_PIN, DirMotor_2, &Motor_Yaxis);
+        MotorDriveInt(DIR_2_PIN, PUL_2_PIN, DirMotor_2, &Motor_Yaxis);
       }
       uiCnt = 0;
     }

@@ -1,7 +1,7 @@
 
 void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir, PU_StepperMotor *motor){
     //Set the direction
-  if((motor->impulseCount > 0) && (motor->impulseCount < MOTOR_MAX_PULSE_COUNT)){ 
+  //if((motor->impulseCount > 0) && (motor->impulseCount < MOTOR_MAX_PULSE_COUNT)){ 
       digitalWrite(pinDir, setdir);
       //Toggle pin to generate impuls
       digitalWrite(pinPull, !digitalRead(pinPull)); 
@@ -18,7 +18,7 @@ void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir, PU_StepperMotor
            }        
         }
       }
-  }
+  //}
 }
 
 void motorCtrl(void)
@@ -101,7 +101,7 @@ void motorCtrl(void)
   }
 lcd_display_info(14, 1, &tSensorY);
 
-  if((position1_Ok == true) /*&& (position2_Ok == true)*/ && (bButtonPressed == YES)){
+  if((position1_Ok == true) && (position2_Ok == true) && (bButtonPressed == YES)){
      // reset the Button press
      bButtonPressed = (bool)NO; 
      digitalWrite(LED, LOW);

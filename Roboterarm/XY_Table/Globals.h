@@ -39,8 +39,8 @@
 
 /* Distance */
 // 400cm is the maximum range of HC-SR04 
-#define MAX_DISTANCE      350   // 350mm is the maximum distance from origine to endpoint for this application
-#define MIN_DISTANCE      50    // 50mm is the minimum range for this application
+#define MAX_DISTANCE      180   // 350mm is the maximum distance from origine to endpoint for this application
+#define MIN_DISTANCE      100    // 50mm is the minimum range for this application
 
 #define TARGET_DISTANCE   100
 #define OFFSET_DISTANCE   ((float)2.0)
