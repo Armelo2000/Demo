@@ -9,12 +9,12 @@ void MotorDriveInt(uint8_t pinDir, uint8_t pinPull, bool setdir, PU_StepperMotor
         //count the impulse/step for each motor
         if(setdir == FORWARD)
         {
-           if(motor->impulseCount < MOTOR_MAX_PULSE_COUNT){
+           if(motor->impulseCount < motor->maxImpuls){
               motor->impulseCount++;  
            }
         }else{
            if(motor->impulseCount > 0){
-              motor->impulseCount++;  
+              motor->impulseCount--;  
            }        
         }
       }

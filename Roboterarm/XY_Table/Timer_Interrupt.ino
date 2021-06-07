@@ -28,6 +28,7 @@ void Timer1_Init(void){
 
 ISR(TIMER1_COMPA_vect) { 
   static uint32_t uiCnt = 0;
+  static uint32_t uiCountManual = 0;
   static uint32_t uiLedBlinkTimer = 0;
   // Check if the button was pressed!
   if(bButtonPressed == YES)
@@ -50,12 +51,6 @@ ISR(TIMER1_COMPA_vect) {
       if(!position1_Ok &&(bSensor1_Out_Range == NO)){
         //keep run the Motor 1 if the target position 1 is not reached
         MotorDriveInt(DIR_1_PIN, PUL_1_PIN, DirMotor_1, &Motor_Xaxis);
-      }else if(digitalRead(X_MANUAL_FORWARD)){
-        //run manually forward
-        MotorDriveInt(DIR_1_PIN, PUL_1_PIN, FORWARD, &Motor_Xaxis);
-      }else if(digitalRead(X_MANUAL_BACKWARD)){
-        //run manually backward
-        MotorDriveInt(DIR_1_PIN, PUL_1_PIN, BACKWARD, &Motor_Xaxis);        
       }
       if(!position2_Ok && (bSensor2_Out_Range == NO)){
         //keep run the Motor 2 if the target position 2 is not reached
@@ -63,5 +58,33 @@ ISR(TIMER1_COMPA_vect) {
       }
       uiCnt = 0;
     }
+  }else if(1) { // manual fahren
+      uiCountManual++;
+     if(uiCountManual >= 40){
+        uiCountManual = 0;
+       if(digitalRead(X_MANUAL_FORWARD)){
+          //run manually forward
+          //if(Motor_Xaxis.impulseCount < Motor_Xaxis.maxImpuls)
+          //MotorDriveInt(DIR_1_PIN, PUL_1_PIN, FORWARD, &Motor_Xaxis);
+        }else if(digitalRead(X_MANUAL_BACKWARD)){
+          //run manually backward
+          //if(Motor_Xaxis.impulseCount > 0)
+          //MotorDriveInt(DIR_1_PIN, PUL_1_PIN, BACKWARD, &Motor_Xaxis);        
+        }
+        else{
+          //nothing
+        }
+       if(digitalRead(Y_MANUAL_FORWARD)){
+          //run manually forward
+          MotorDriveInt(DIR_2_PIN, PUL_2_PIN, FORWARD, &Motor_Yaxis);
+          //Motor_Yaxis.impulseCount++;
+        }else if(digitalRead(Y_MANUAL_BACKWARD)){
+          //run manually backward
+          MotorDriveInt(DIR_2_PIN, PUL_2_PIN, BACKWARD, &Motor_Yaxis);
+          //Motor_Yaxis.impulseCount--;       
+        }else{
+          //nothing
+        }
+     }
   }
 }

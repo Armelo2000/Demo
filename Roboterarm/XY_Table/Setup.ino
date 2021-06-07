@@ -14,6 +14,9 @@ void setup() {
   //Init pin for manual drive
   pinMode(X_MANUAL_FORWARD, INPUT);
   pinMode(X_MANUAL_BACKWARD, INPUT);
+
+  pinMode(Y_MANUAL_FORWARD, INPUT);
+  pinMode(Y_MANUAL_BACKWARD, INPUT);
   
   Serial.begin (9600);
   //init the lcd
@@ -22,7 +25,8 @@ void setup() {
   tSensorY.prevMsgId = 0xFF;
   Motor_Xaxis.impulseCount = 0;
   Motor_Yaxis.impulseCount = 0;
-  
+  Motor_Xaxis.maxImpuls = MOTOR_XMAX_PULSE_COUNT;
+  Motor_Yaxis.maxImpuls = MOTOR_YMAX_PULSE_COUNT; 
   // Disable Interrupts
   cli();
   // Button Init

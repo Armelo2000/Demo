@@ -12,7 +12,7 @@
 #define BUTTON        13
 
 /* LED */
-#define LED       8
+#define LED       52
 
 /* Sensor 1 Pin */
 #define TRIGGER_PIN_1     10
@@ -34,8 +34,8 @@
 #define X_MANUAL_FORWARD    3
 #define X_MANUAL_BACKWARD   8
 
-//#define Y_MANUAL_FORWARD    3
-//#define Y_MANUAL_BACKWARD   8
+#define Y_MANUAL_FORWARD    3
+#define Y_MANUAL_BACKWARD   8
 
 /* Distance */
 // 400cm is the maximum range of HC-SR04 
@@ -49,8 +49,8 @@
 #define MIN_SPEED       30
 #define MAX_SPEED       600
 // Motor pulse
-#define MOTOR_MAX_PULSE_COUNT       0xFFFFFFFF  //30000 // ? ToDo
-
+#define MOTOR_XMAX_PULSE_COUNT       17500  //30000 // ? ToDo
+#define MOTOR_YMAX_PULSE_COUNT       7450   //30000 // ? ToDo
 
 // Initialize the ultraschall sensors
 NewPing sonar1(TRIGGER_PIN_1, ECHO_PIN_1, MAX_DISTANCE);
@@ -104,6 +104,7 @@ typedef struct _lcd_message_status
 typedef struct _stepper
 {
   uint32_t impulseCount;
+  uint32_t maxImpuls;
 }PU_StepperMotor;
 
 

@@ -11,7 +11,11 @@ void loop()
 
     Serial.println("Start...");
   }
-  Run();
+  Serial.print("Impulse Count X-Axis : ");
+  Serial.println(Motor_Xaxis.impulseCount);
+  Serial.print("Impulse Count Y-Axis : ");
+  Serial.println(Motor_Yaxis.impulseCount);
+  //Run();
   //Serial.println("Start1...");
-  delay(1000);
+  delay(200);
 }
