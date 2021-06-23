@@ -1,0 +1,34 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\keil_projects\adc\adc_stm32f10x.uvproj
+Project File Date:  06/22/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling startup_stm32f10x_md.s...
+compiling system_stm32f10x.c...
+C:\Keil460\ARM\Inc\ST\STM32F10x\stm32f10x.h(96): error:  #35: #error directive: "Please select first the target STM32F10x device used in your application (in stm32f10x.h file)"
+compiling main.c...
+src\main.c(18): warning:  #1-D: last line of file ends without a newline
+Target not created
+Clean started: Project: 'adc_stm32f10x'
+   deleting intermediate output files for target 'Target 1'
+Rebuild target 'Target 1'
+assembling startup_stm32f10x_md.s...
+compiling system_stm32f10x.c...
+compiling main.c...
+src\main.c(18): warning:  #1-D: last line of file ends without a newline
+*** Error: cannot write Scatter-file 'objects\adc_stm32f10x.sct'
+Target not created
+Clean started: Project: 'adc_stm32f10x'
+   deleting intermediate output files for target 'Target 1'
+Rebuild target 'Target 1'
+assembling startup_stm32f10x_md.s...
+compiling system_stm32f10x.c...
+compiling main.c...
+linking...
+Program Size: Code=796 RO-data=268 RW-data=20 ZI-data=1636  
+".\objects\adc_stm32f10x.axf" - 0 Error(s), 0 Warning(s).

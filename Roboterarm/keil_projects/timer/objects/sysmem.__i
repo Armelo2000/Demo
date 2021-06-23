@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Inc -I.\Drivers\CMSIS\Device\ST\STM32F1xx\Include -I.\Drivers\CMSIS\Include -I.\Drivers\STM32F1xx_HAL_Driver\Inc --c99 
+-I C:\Keil460\ARM\RV31\INC 
+-I C:\Keil460\ARM\CMSIS\Include 
+-I C:\Keil460\ARM\Inc\ST\STM32F10x 
+-DSTM32F103xB -o ".\objects\sysmem.o" --omf_browse ".\objects\sysmem.crf" --depend ".\objects\sysmem.d" "Src\sysmem.c"

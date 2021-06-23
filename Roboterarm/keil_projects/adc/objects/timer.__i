@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\inc 
+-I C:\Keil460\ARM\RV31\INC 
+-I C:\Keil460\ARM\CMSIS\Include 
+-I C:\Keil460\ARM\Inc\ST\STM32F10x 
+-DSTM32F10X_MD -o ".\objects\timer.o" --omf_browse ".\objects\timer.crf" --depend ".\objects\timer.d" "src\timer.c"
