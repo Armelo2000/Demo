@@ -8,7 +8,6 @@
 #ifndef PARAMETERLIST_H_
 #define PARAMETERLIST_H_
 
-#include "gemue/bib/system/para/Parameter.h"
 
 typedef ParameterData::Parameter Parameter;
 
